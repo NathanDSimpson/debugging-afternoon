@@ -12,6 +12,9 @@ class App extends Component {
       cart: [],
       showCart: false
     };
+    this.addToCart = this.addToCart.bind(this)
+    this.removeFromCart = this.removeFromCart.bind(this)
+    this.navigate = this.navigate.bind(this)
   }
   componentDidMount() {
     axios
@@ -22,12 +25,13 @@ class App extends Component {
         });
       });
   }
-  addToCart(item) {
+  addToCart (item) {
     this.setState({
       cart: [...this.state.cart, item]
     });
   }
   removeFromCart(index) {
+    console.log("remove from cart is being executed")
     let cartCopy = this.state.cart.slice();
     cartCopy.splice(index, 1);
     this.setState({
@@ -36,9 +40,13 @@ class App extends Component {
   }
   navigate(location) {
     if (location === "cart") {
-      this.state.showCart = true;
+      this.setState({
+        showCart: true
+      })
     } else {
-      this.state.showCart = false;
+      this.setState({
+        showCart: false
+      })
     }
   }
   render() {
